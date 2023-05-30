@@ -1,8 +1,8 @@
-import envVars from "../envvars.ts";
+import envVars from "../envvars.js";
 
 const bearerToken = envVars.TWITTER_BEARER_TOKEN;
 
-export default async function convertTwitterIDtoScreenName(
+export default async function convertTwitterIDtoUsername(
   twitterID: string,
 ): Promise<string> {
   const twitterUserInfo = await fetch(`https://api.twitter.com/2/users/${twitterID}`, {
