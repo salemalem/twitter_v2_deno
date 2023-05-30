@@ -5,7 +5,7 @@ import {
   TwitterFollowStructure
 } from "./components/fetchFollows.ts";
 
-const userID = "1482802950104031232";
+const userID = "1330894331721494529";
 
 const followsJson = await fetchFollows(userID);
 (followsJson as Array<TwitterFollowStructure>).forEach(async (follow) => {

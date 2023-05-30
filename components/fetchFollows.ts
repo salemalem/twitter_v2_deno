@@ -9,13 +9,15 @@ export type TwitterFollowStructure = {
   username: string;
 }
 
-export const fetchFollows = async (userID: Number): Promise<Array<TwitterFollowStructure>> => {
+export const fetchFollows = async (userID: string): Promise<Array<TwitterFollowStructure>> => {
   const followsResponse = await fetch(`https://api.twitter.com/2/users/${userID}/following`, {
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${bearerToken}`,
       }
     });
-  const followsJson = (await followsResponse?.json()).data;
-  return followsJson;
+  
+  const followsJson = await followsResponse?.json();
+  const followsJsonData = followsJson.data;
+  return followsJsonData;
 }
