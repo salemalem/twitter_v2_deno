@@ -1,4 +1,4 @@
-import envVars from "../envvars.js";
+import envVars from "../envvars.ts";
 
 const bearerToken = envVars.TWITTER_BEARER_TOKEN;
 

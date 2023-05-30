@@ -25,7 +25,7 @@ let count = 0;
   const result = postgresQuery.rows[0][0];
   if (result != true) { // didn't follow before
     count++;
-    const twitterScreenName = await convertTwitterIDtoScreenName(userID);
+    const twitterScreenName = await convertTwitterIDtoUsername(userID);
     const twitterFollowLink = `[${twitterScreenName}](${twitterLink}${twitterScreenName})`;
     let message = `${twitterFollowLink} follows ${name}  [${username}](${twitterLink}${username})`;
     console.log(message);
