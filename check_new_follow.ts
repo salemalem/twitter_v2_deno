@@ -1,5 +1,6 @@
 // @ts-ignore
 import envVars from "./envvars.ts";
+import { sleep } from "./deps.ts";
 // components
 import { 
   fetchFollows,
@@ -35,6 +36,9 @@ let count = 0;
     const postgresQuery = await postgresClient.queryArray(insertQuery);
   }
 });
+
+// sleep because function is async and code below will be executed before for each loop is finished
+await sleep(1);
 if (count == 0) {
   console.log("No new follows");
 }

@@ -1,4 +1,5 @@
-import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+// @ts-ignore
+import { Client } from "../deps.ts";
 import envVars from "../envvars.ts";
 
 const postgresClient = new Client(envVars.DATABASE_URL);
