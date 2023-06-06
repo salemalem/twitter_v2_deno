@@ -1,6 +1,13 @@
-import envVars from "../envvars.ts";
+import {
+  load,
+  logger
+} from "../deps.ts"; 
 
-const bearerToken = envVars.TWITTER_BEARER_TOKEN;
+await load({
+  envPath: "../.env",
+  export: true,
+});
+const bearerToken = Deno.env.get("TWITTER_BEARER_TOKEN");
 
 export default async function convertTwitterIDtoUsername(
   twitterID: string,
@@ -12,5 +19,14 @@ export default async function convertTwitterIDtoUsername(
     }
   })
   const twitterUserInfoJson = await twitterUserInfo.json();
+  console.log(twitterUserInfoJson);
+  if (twitterUserInfoJson.data === undefined) {
+    logger.error(twitterUserInfoJson);
+    throw new Error("Error fetching twitter user info");
+  }
+  if (twitterUserInfoJson.errors) {
+    logger.error(twitterUserInfoJson.errors);
+    throw new Error("Error fetching twitter user info");
+  }
   return twitterUserInfoJson.data.username;
 }

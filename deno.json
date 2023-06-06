@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "lodash": "https://esm.sh/lodash"
+  },
+  "tasks": {
+    "alert_new_follow": "deno run -A ./watchers/alert_new_follow.ts"
+  }
+}

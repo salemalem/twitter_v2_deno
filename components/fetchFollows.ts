@@ -1,7 +1,13 @@
 // @ts-ignore
-import envVars from "../envvars.ts";
+import {
+  load, logger,
+} from "../deps.ts"; 
 
-const bearerToken = envVars.TWITTER_BEARER_TOKEN;
+await load({
+  envPath: "../.env",
+  export: true,
+});
+const bearerToken = Deno.env.get("TWITTER_BEARER_TOKEN");
 
 export type TwitterFollowStructure = {
   name:     string;
@@ -18,6 +24,11 @@ export const fetchFollows = async (userID: string): Promise<Array<TwitterFollowS
     });
   
   const followsJson = await followsResponse?.json();
+  if (followsJson.errors) {
+    logger.error(followsJson.errors);
+    throw new Error("Error fetching follows");
+  }
   const followsJsonData = followsJson.data;
   return followsJsonData;
+  
 }

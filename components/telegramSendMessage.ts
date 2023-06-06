@@ -1,5 +1,11 @@
-import envVars from "../envvars.ts";
+import {
+  load,
+} from "../deps.ts"; 
 
+await load({
+  envPath: "../.env",
+  export: true,
+});
 const SPECIAL_CHARS = [
   '\\',
   '_',
@@ -34,7 +40,7 @@ export default async function telegramSendMessage(
   chatId: number,
 ) : Promise<any> {
   const response = await fetch(
-    `https://api.telegram.org/bot${envVars.TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${chatId}&parse_mode=MarkdownV2&text=${text}`,
+    `https://api.telegram.org/bot${Deno.env.get("TELEGRAM_BOT_TOKEN")}/sendMessage?chat_id=${chatId}&parse_mode=MarkdownV2&text=${text}`,
   );
   console.log(response.url);
 

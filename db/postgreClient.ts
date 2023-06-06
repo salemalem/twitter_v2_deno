@@ -1,8 +1,15 @@
 // @ts-ignore
 import { Client } from "../deps.ts";
-import envVars from "../envvars.ts";
+import {
+  load,
+} from "../deps.ts"; 
 
-const postgresClient = new Client(envVars.DATABASE_URL);
+await load({
+  envPath: "../.env",
+  export: true,
+});
+
+const postgresClient = new Client(Deno.env.get("DATABASE_URL"));
 await postgresClient.connect();
 
 export default postgresClient;
