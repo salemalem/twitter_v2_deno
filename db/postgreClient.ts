@@ -5,7 +5,7 @@ import {
 } from "../deps.ts"; 
 
 await load({
-  envPath: "../.env",
+  envPath: "./.env",
   export: true,
 });
 

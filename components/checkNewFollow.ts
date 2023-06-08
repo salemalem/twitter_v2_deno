@@ -21,7 +21,10 @@ import postgresClient from "../db/postgreClient.ts";
 export default async function checkNewFollow (userID: string) {
   const followsJson = await fetchFollows(userID);
   let count = 0;
-  const newFollowMessages = {};
+  const newFollowMessages:{
+    message: string,
+    username: string,
+  }[] = [];
 
   (followsJson as Array<TwitterFollowStructure>).forEach(async (follow) => {
     const { 
@@ -29,6 +32,7 @@ export default async function checkNewFollow (userID: string) {
       name,
       username,
     } = follow;
+
     const checkIfFollowsAlreadyQuery = `SELECT EXISTS(SELECT 1 FROM "TwitterFollows" WHERE "twitterID" = ${userID} AND "followID" = ${id})`;
     const postgresQuery = await postgresClient.queryArray(checkIfFollowsAlreadyQuery);
     const result = postgresQuery.rows[0][0];
@@ -36,11 +40,16 @@ export default async function checkNewFollow (userID: string) {
       count++;
       const twitterUsername = await convertTwitterIDtoUsername(userID);
       let message = `${twitterUsername} follows ${name}`;
-      newFollowMessages["message"] = message;
-      newFollowMessages["username"] = username;
-
+      const newFollowMessage = {
+        message: "",
+        username: "",
+      };
+      newFollowMessage["message"] = message;
+      newFollowMessage["username"] = username;
+      logger.info(message);
       const insertQuery = `INSERT INTO "TwitterFollows" ("twitterID", "followID") VALUES ('${userID}', '${id}')`;
       const postgresQuery = await postgresClient.queryArray(insertQuery);
+      newFollowMessages.push(newFollowMessage);
     }
   });
 

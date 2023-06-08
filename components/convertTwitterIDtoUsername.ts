@@ -1,10 +1,10 @@
 import {
   load,
-  logger
+  logger,
 } from "../deps.ts"; 
 
 await load({
-  envPath: "../.env",
+  envPath: "./.env",
   export: true,
 });
 const bearerToken = Deno.env.get("TWITTER_BEARER_TOKEN");
@@ -19,7 +19,6 @@ export default async function convertTwitterIDtoUsername(
     }
   })
   const twitterUserInfoJson = await twitterUserInfo.json();
-  console.log(twitterUserInfoJson);
   if (twitterUserInfoJson.data === undefined) {
     logger.error(twitterUserInfoJson);
     throw new Error("Error fetching twitter user info");

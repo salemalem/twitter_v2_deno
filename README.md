@@ -2,4 +2,4 @@
 `deno run -A twttier_follow_put_db.ts`
 
 # Once we grabbed his follows, we can check his new follows easily
-`deno run -A check_new_follow.ts`
+`deno task alert_new_follow`
