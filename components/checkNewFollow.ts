@@ -38,12 +38,12 @@ export default async function checkNewFollow (userID: string) {
     const result = postgresQuery.rows[0][0];
     if (result != true) { // didn't follow before
       count++;
-      // TODO: check for userID already folowed by other twitter account
       const twitterUsername = await convertTwitterIDtoUsername(userID);
       let message = `${twitterUsername} follows ${name}`;
       const newFollowMessage = {
         message: "",
         username: "",
+        id: id,
       };
       newFollowMessage["message"] = message;
       newFollowMessage["username"] = username;

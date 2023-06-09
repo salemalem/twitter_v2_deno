@@ -6,7 +6,9 @@ import {
   logger
 } from "../deps.ts"; 
 import checkNewFollow from "../components/checkNewFollow.ts";
+import crossCheckFollow from "../components/crossCheckFollow.ts";
 import postgresClient from "../db/postgreClient.ts";
+import convertTwitterIDtoUsername from "../components/convertTwitterIDtoUsername.ts";
 
 await load({
   envPath: "../.env",
@@ -33,20 +35,36 @@ for (const twitterID of twitterIDs){
   logger.info(followMessages);
   for (const followMessage of followMessages) {
     logger.info(followMessage);
-    const { message, username } = followMessage;
+
+    const { 
+      message, 
+      username,
+      id,
+    } = followMessage;
+    let crossCheckMessage = "";
+    const crossFollows = await crossCheckFollow(id);
+    if (crossFollows.length > 0) {
+      crossCheckMessage = "Already followed by";
+      for (const crossFollow of crossFollows) {
+        if (crossFollow === twitterID) {
+          continue;
+        }
+        crossCheckMessage += " " + await convertTwitterIDtoUsername(crossFollow);
+      }
+    }
     const embed = {
       title: message,
       description: "Investment opportunity",
       color: 0x00ff00,
       fields: [
         {
-          name: message,
+          name: crossCheckMessage,
           value: twitterLink + username,
         },
       ],
     };
     await sendMessage(discordBot, "1113203625280417822", {
-      content: message,
+      // content: message,
       embeds: [
         embed
       ]
