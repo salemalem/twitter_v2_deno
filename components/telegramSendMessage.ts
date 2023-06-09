@@ -1,11 +1,7 @@
 import {
   load,
-} from "../deps.ts"; 
+} from "/deps.ts"; 
 
-await load({
-  envPath: "../.env",
-  export: true,
-});
 const SPECIAL_CHARS = [
   '\\',
   '_',

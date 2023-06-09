@@ -1,20 +1,17 @@
 // @ts-ignore
 import {
-  load,
   sleep,
   logger,
-} from "../deps.ts"; 
-await load({
-  envPath: "./.env",
-  export: true,
-});
+} from "/deps.ts"; 
+
+
 // components
 import { 
   fetchFollows,
   TwitterFollowStructure,
 } from "./fetchFollows.ts";
 import convertTwitterIDtoUsername from "./convertTwitterIDtoUsername.ts";
-import postgresClient from "../db/postgreClient.ts";
+import postgresClient from "/db/postgreClient.ts";
 
 
 

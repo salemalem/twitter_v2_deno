@@ -2,14 +2,9 @@
 import { 
   createBot, GatewayIntents, startBot,
   addReaction, sendMessage,
-  load,
   logger
-} from "../deps.ts"; 
+} from "/deps.ts"; 
 
-await load({
-  envPath: "./.env",
-  export: true,
-});
 
 const discordToken = Deno.env.get("DISCORD_BOT_TOKEN");
 const discordIntents = [GatewayIntents.Guilds, GatewayIntents.GuildMessages, GatewayIntents.MessageContent, GatewayIntents.GuildMembers];

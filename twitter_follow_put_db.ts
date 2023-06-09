@@ -1,9 +1,9 @@
 // @ts-ignore
-import postgresClient from "./db/postgreClient.ts";
+import postgresClient from "/db/postgreClient.ts";
 import { 
   fetchFollows,
   TwitterFollowStructure
-} from "./components/fetchFollows.ts";
+} from "/components/fetchFollows.ts";
 
 const userID = "1330894331721494529";
 

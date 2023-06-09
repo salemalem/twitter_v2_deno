@@ -1,8 +1,10 @@
 {
   "imports": {
-    "lodash": "https://esm.sh/lodash"
+    "lodash": "https://esm.sh/lodash",
+    "/": "./",
+    "./": "./"
   },
   "tasks": {
-    "alert_new_follow": "deno run -A --unstable ./watchers/alert_new_follow.ts"
+    "alert_new_follow_cron": "deno run -A --unstable cron.ts"
   }
 }

@@ -1,8 +1,8 @@
 // @ts-ignore
 import {
   logger,
-} from "../deps.ts"; 
-import postgresClient from "../db/postgreClient.ts";
+} from "/deps.ts"; 
+import postgresClient from "/db/postgreClient.ts";
 
 
 /*
@@ -19,5 +19,9 @@ export default async function crossCheckFollow(userID: string): Promise<Array<st
   logger.info(`Cross check for ${userID} with ${postgresQuery.rows.length} users`);
   logger.info(postgresQuery.rows);
 
-  return postgresQuery.rows[0];
+  let crossCheckFollows: Array<string> = [];
+  for (const crossFollow of postgresQuery.rows) {
+    crossCheckFollows.push(crossFollow[0]);
+  }
+  return crossCheckFollows;
 }

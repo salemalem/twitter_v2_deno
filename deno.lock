@@ -53,6 +53,7 @@
     "https://deno.land/std@0.190.0/collections/filter_values.ts": "5b9feaf17b9a6e5ffccdd36cf6f38fa4ffa94cff2602d381c2ad0c2a97929652",
     "https://deno.land/std@0.190.0/collections/without_all.ts": "a89f5da0b5830defed4f59666e188df411d8fece35a5f6ca69be6ca71a95c185",
     "https://deno.land/std@0.190.0/dotenv/mod.ts": "f5a8123741d1561ae8184a7f043bc097b15132c5171c651142b804b6dbc21853",
+    "https://deno.land/x/deno_cron@v1.0.0/cron.ts": "7f984d0c4c7ac4fb1ad3cd241d457e7808a9362735d910abb02dc689883ee3ef",
     "https://deno.land/x/discordeno@18.0.1/bot.ts": "b6c4f1c966f1a968186921619b6e5ebfec7c5eb0dc2e49a66d2c86b37cb2acc7",
     "https://deno.land/x/discordeno@18.0.1/gateway/manager/calculateTotalShards.ts": "2d2ebe860861d58524416446426d78e5b881c17b3a565ea4822c67f5534214bc",
     "https://deno.land/x/discordeno@18.0.1/gateway/manager/calculateWorkerId.ts": "44c46f2977104a5f92cc21cf31d6b2bc5dcfcefba23495cd619dbdf074a00af1",

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.window"],
+    "module": "esnext",
+    "allowImportingTsExtensions": true,  // <---- This ignored the error
+    "noEmit": true                       // <---- Since "allowImportingTsExtensions" can only work along with "noEmit" I had to add this too
+  },
+}

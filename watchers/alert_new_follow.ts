@@ -1,22 +1,17 @@
 // @ts-ignore
-import discordBot from "../discord/discordBot.ts";
+import discordBot from "/discord/discordBot.ts";
 import { 
   sendMessage,
-  load,
   logger
 } from "../deps.ts"; 
-import checkNewFollow from "../components/checkNewFollow.ts";
-import crossCheckFollow from "../components/crossCheckFollow.ts";
-import postgresClient from "../db/postgreClient.ts";
-import convertTwitterIDtoUsername from "../components/convertTwitterIDtoUsername.ts";
-
-await load({
-  envPath: "../.env",
-  export: true,
-});
+import checkNewFollow from "/components/checkNewFollow.ts";
+import crossCheckFollow from "/components/crossCheckFollow.ts";
+import postgresClient from "/db/postgreClient.ts";
+import convertTwitterIDtoUsername from "/components/convertTwitterIDtoUsername.ts";
 
 
 export default async function alert_new_follow() {
+  logger.info("alert_new_follow process started");
   const selectQuery = `SELECT "twitter_id" FROM "track_ids"`;
   const postgresQuery = await postgresClient.queryArray(selectQuery);
   const twitterIDsRows = postgresQuery.rows;
@@ -45,7 +40,9 @@ export default async function alert_new_follow() {
       } = followMessage;
       let crossCheckMessage = "";
       const crossFollows = await crossCheckFollow(id);
-      if (crossFollows.length > 0) {
+      logger.info(crossFollows);
+      logger.info(crossFollows.length);
+      if (crossFollows.length > 1) {
         crossCheckMessage = "Already followed by";
         for (const crossFollow of crossFollows) {
           if (crossFollow === twitterID) {

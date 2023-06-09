@@ -1,12 +1,7 @@
 import {
-  load,
   logger,
-} from "../deps.ts"; 
+} from "/deps.ts"; 
 
-await load({
-  envPath: "./.env",
-  export: true,
-});
 const bearerToken = Deno.env.get("TWITTER_BEARER_TOKEN");
 
 export default async function convertTwitterIDtoUsername(
