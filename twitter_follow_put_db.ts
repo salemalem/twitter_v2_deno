@@ -4,14 +4,26 @@ import {
   fetchFollows,
   TwitterFollowStructure
 } from "/components/fetchFollows.ts";
+import {
+  logger,
+  sleep,
+} from "/deps.ts"
 
-const userID = "1330894331721494529";
+const userID = "2803852087";
 
 const followsJson = await fetchFollows(userID);
+const followsCount = followsJson.length;
+logger.info(`Fetched ${followsCount} follows`);
+let counter = 0;
 (followsJson as Array<TwitterFollowStructure>).forEach(async (follow) => {
+  counter++;
   const { id } = follow;
-  console.log(id);
+  logger.info(`Inserted ${id} into database with counter of ${counter}`);
   const insertQuery = `INSERT INTO "TwitterFollows" ("twitterID", "followID") VALUES ('${userID}', '${id}')`;
   const postgresQuery = await postgresClient.queryArray(insertQuery);
-  // console.log(postgresQuery);
 });
+
+await sleep(1);
+if (counter === followsCount) {
+  logger.info("Finished inserting all follows into database");
+}
