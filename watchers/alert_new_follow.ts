@@ -68,6 +68,7 @@ export default async function alert_new_follow() {
           embed
         ]
       });
+      // TODO: add send message for 1114084032246992977 and test it
     }
   }
 };

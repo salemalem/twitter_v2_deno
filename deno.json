@@ -5,7 +5,7 @@
     "./": "./"
   },
   "tasks": {
-    "alert_new_follow_cron": "deno run -A --unstable cron.ts",
+    "alert_new_follow_cron": "denon run -A --unstable cron.ts",
     "twitter_follow_put_db": "deno run -A --unstable twitter_follow_put_db.ts"
   }
 }
