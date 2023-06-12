@@ -23,6 +23,7 @@ export default async function checkNewFollow (userID: string) {
     message: string,
     username: string,
   }[] = [];
+  const twitterUsername = await convertTwitterIDtoUsername(userID);
 
   (followsJson as Array<TwitterFollowStructure>).forEach(async (follow) => {
     const { 
@@ -36,16 +37,14 @@ export default async function checkNewFollow (userID: string) {
     const result = postgresQuery.rows[0][0];
     if (result != true) { // didn't follow before
       count++;
-      const twitterUsername = await convertTwitterIDtoUsername(userID);
       // const twitterUsername = "";
       const message = `${twitterUsername} follows ${name}`;
       const newFollowMessage = {
         message: "",
-        username: "",
-        id: id,
+        username,
+        id,
       };
       newFollowMessage["message"] = message;
-      newFollowMessage["username"] = username;
       logger.info(`${userID}: ${message}`);
       const insertQuery = `INSERT INTO "TwitterFollows" ("twitterID", "followID") VALUES ('${userID}', '${id}')`;
       const _postgresQuery = await postgresClient.queryArray(insertQuery);

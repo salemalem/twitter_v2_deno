@@ -9,7 +9,7 @@ import {
   sleep,
 } from "/deps.ts"
 
-const userID = "14946614";
+const userID = "920092361719300096";
 
 const followsJson = await fetchFollows(userID);
 const followsCount = followsJson.length;
