@@ -62,6 +62,8 @@ export default async function alert_new_follow() {
           },
         ],
       };
+      logger.info(`Message: ${message}`);
+      logger.info(`Cross check: ${crossCheckMessage}`);
       await sendMessage(discordBot, "1113203625280417822", {
         // content: message,
         embeds: [
