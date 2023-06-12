@@ -30,7 +30,7 @@ export default async function checkNewFollow (userID: string) {
       name,
       username,
     } = follow;
-
+    
     const checkIfFollowsAlreadyQuery = `SELECT EXISTS(SELECT 1 FROM "TwitterFollows" WHERE "twitterID" = ${userID} AND "followID" = ${id})`;
     const postgresQuery = await postgresClient.queryArray(checkIfFollowsAlreadyQuery);
     const result = postgresQuery.rows[0][0];
@@ -38,7 +38,7 @@ export default async function checkNewFollow (userID: string) {
       count++;
       const twitterUsername = await convertTwitterIDtoUsername(userID);
       // const twitterUsername = "";
-      let message = `${twitterUsername} follows ${name}`;
+      const message = `${twitterUsername} follows ${name}`;
       const newFollowMessage = {
         message: "",
         username: "",
@@ -46,9 +46,9 @@ export default async function checkNewFollow (userID: string) {
       };
       newFollowMessage["message"] = message;
       newFollowMessage["username"] = username;
-      logger.info(message);
+      logger.info(`${userID}: ${message}`);
       const insertQuery = `INSERT INTO "TwitterFollows" ("twitterID", "followID") VALUES ('${userID}', '${id}')`;
-      const postgresQuery = await postgresClient.queryArray(insertQuery);
+      const _postgresQuery = await postgresClient.queryArray(insertQuery);
       newFollowMessages.push(newFollowMessage);
     }
   });
