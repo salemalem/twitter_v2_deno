@@ -12,9 +12,9 @@ cron(every6hour, async () => {
   await alert_new_follow();
 });
 
-// const everyMinute = "* * * * *";
+// const everyMinute = "*/5 * * * *";
 
 // cron(everyMinute, async () => {
-//   logger.info("cron job every minute");
+//   logger.info("cron job every 5 minutes");
 //   await alert_new_follow();
 // });

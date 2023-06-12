@@ -16,6 +16,7 @@ import postgresClient from "/db/postgreClient.ts";
 
 
 export default async function checkNewFollow (userID: string) {
+  logger.info(`START: checkNewFollow for ${userID}`);
   const followsJson = await fetchFollows(userID);
   let count = 0;
   const newFollowMessages:{
@@ -36,6 +37,7 @@ export default async function checkNewFollow (userID: string) {
     if (result != true) { // didn't follow before
       count++;
       const twitterUsername = await convertTwitterIDtoUsername(userID);
+      // const twitterUsername = "";
       let message = `${twitterUsername} follows ${name}`;
       const newFollowMessage = {
         message: "",
@@ -54,7 +56,7 @@ export default async function checkNewFollow (userID: string) {
   // sleep because function is async and code below will be executed before for each loop is finished
   await sleep(1);
   if (count == 0) {
-    logger.info("No new follows");
+    logger.info(`FINISH: No new follows for ${userID}`);
   }
   return newFollowMessages;
 }

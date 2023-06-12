@@ -11,7 +11,7 @@ import convertTwitterIDtoUsername from "/components/convertTwitterIDtoUsername.t
 
 
 export default async function alert_new_follow() {
-  logger.info("alert_new_follow process started");
+  logger.info("START: alert_new_follow process");
   const selectQuery = `SELECT "twitter_id" FROM "track_ids"`;
   const postgresQuery = await postgresClient.queryArray(selectQuery);
   const twitterIDsRows = postgresQuery.rows;
@@ -71,4 +71,5 @@ export default async function alert_new_follow() {
       // TODO: add send message for 1114084032246992977 and test it
     }
   }
+  logger.info("FINISH: alert_new_follow process");
 };
