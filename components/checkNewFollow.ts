@@ -24,8 +24,10 @@ export default async function checkNewFollow (userID: string) {
     username: string,
   }[] = [];
   const twitterUsername = await convertTwitterIDtoUsername(userID);
+  
+  for (let i = 0; i < followsJson.length;  i++) {
+    const follow = followsJson[i];
 
-  (followsJson as Array<TwitterFollowStructure>).forEach(async (follow) => {
     const { 
       id,
       name,
@@ -50,7 +52,7 @@ export default async function checkNewFollow (userID: string) {
       const insertQuery = `INSERT INTO "TwitterFollows" ("twitterID", "followID") VALUES ('${userID}', '${id}')`;
       const _postgresQuery = await postgresClient.queryArray(insertQuery);
     }
-  });
+  }
 
   // sleep because function is async and code below will be executed before for each loop is finished
   await sleep(1);
