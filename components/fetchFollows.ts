@@ -13,7 +13,7 @@ export type TwitterFollowStructure = {
 }
 
 export const fetchFollows = async (userID: string): Promise<Array<TwitterFollowStructure>> => {
-  const followsResponse = await fetch(`https://api.twitter.com/2/users/${userID}/following`, {
+  const followsResponse = await fetch(`https://api.twitter.com/2/users/${userID}/following?max_results=${1000}`, {
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${bearerToken}`,
