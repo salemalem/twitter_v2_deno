@@ -51,6 +51,13 @@ for (const followMessage of followMessages) {
   logger.info(`Message: ${message}`);
   logger.info(`Cross check: ${crossCheckMessage}`);
 
+  // Block Hacks
+  await sendMessage(discordBot, "1114084032246992977", {
+    embeds: [
+      embed
+    ]
+  });
+
   // SecureZero
   await sendMessage(discordBot, "1113203625280417822", {
     // content: message,
@@ -59,10 +66,5 @@ for (const followMessage of followMessages) {
     ]
   });
 
-  // Block Hacks
-  await sendMessage(discordBot, "1114084032246992977", {
-    embeds: [
-      embed
-    ]
-  });
+  
 }

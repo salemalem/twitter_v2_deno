@@ -39,9 +39,10 @@ export default async function alert_new_follow() {
         id,
       } = followMessage;
       let crossCheckMessage = "";
-      const crossFollows = await crossCheckFollow(id);
+      let crossFollows = await crossCheckFollow(id);
       logger.info(crossFollows);
       logger.info(crossFollows.length);
+      crossFollows = [...new Set(crossFollows)];
       if (crossFollows.length > 1) {
         crossCheckMessage = "Already followed by";
         for (const crossFollow of crossFollows) {

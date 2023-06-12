@@ -18,6 +18,7 @@ import postgresClient from "/db/postgreClient.ts";
 export default async function checkNewFollow (userID: string) {
   logger.info(`START: checkNewFollow for ${userID}`);
   const followsJson = await fetchFollows(userID);
+  logger.info(`${userID}: ${followsJson.length} follows`);
   let count = 0;
   const newFollowMessages:{
     message: string,
