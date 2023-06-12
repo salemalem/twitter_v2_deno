@@ -65,13 +65,22 @@ export default async function alert_new_follow() {
       };
       logger.info(`Message: ${message}`);
       logger.info(`Cross check: ${crossCheckMessage}`);
+
+      // Secure Zero
       await sendMessage(discordBot, "1113203625280417822", {
         // content: message,
         embeds: [
           embed
         ]
       });
-      // TODO: add send message for 1114084032246992977 and test it
+
+      // Block Hacks
+      await sendMessage(discordBot, "1114084032246992977", {
+        // content: message,
+        embeds: [
+          embed
+        ]
+      });
     }
   }
   logger.info("FINISH: alert_new_follow process");
