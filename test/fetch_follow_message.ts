@@ -56,4 +56,9 @@ for (const followMessage of followMessages) {
       embed
     ]
   });
+  await sendMessage(discordBot, "1114084032246992977", {
+    embeds: [
+      embed
+    ]
+  });
 }
