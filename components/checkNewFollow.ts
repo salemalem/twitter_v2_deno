@@ -46,9 +46,9 @@ export default async function checkNewFollow (userID: string) {
       };
       newFollowMessage["message"] = message;
       logger.info(`${userID}: ${message}`);
+      newFollowMessages.push(newFollowMessage);
       const insertQuery = `INSERT INTO "TwitterFollows" ("twitterID", "followID") VALUES ('${userID}', '${id}')`;
       const _postgresQuery = await postgresClient.queryArray(insertQuery);
-      newFollowMessages.push(newFollowMessage);
     }
   });
 
