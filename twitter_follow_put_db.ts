@@ -42,9 +42,13 @@ const batchPutDB = async () => {
     twitterIDs.push(twitterIDparsed.toString());
   }
 
+  let counter = 0;
   for (const twitterID of twitterIDs) {
     await twitterFollowPutID(twitterID);
+    logger.info(`Finished inserting all follows for ${twitterID} into database with counter of ${counter}`);
+    counter++;
   }
 }
 
 await batchPutDB();
+

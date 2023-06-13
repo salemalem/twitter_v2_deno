@@ -1,0 +1,9 @@
+{
+  "apps": [
+      {
+          "name": "twitter_follow_checker",
+          "script": "deno",
+          "args" : "task alert_new_follow_cron"
+      }
+  ]
+}
