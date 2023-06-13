@@ -24,8 +24,10 @@ export default async function checkNewFollow (userID: string) {
     message: string,
     username: string,
   }[] = [];
-  const twitterUsername = await convertTwitterIDtoUsername(userID);
+  let twitterUsername;
   
+  let hasNewFollows = false;
+
   for (let i = 0; i < followsJson.length;  i++) {
     const follow = followsJson[i];
 
@@ -38,7 +40,11 @@ export default async function checkNewFollow (userID: string) {
     const checkIfFollowsAlreadyQuery = `SELECT EXISTS(SELECT 1 FROM "TwitterFollows" WHERE "twitterID" = ${userID} AND "followID" = ${id})`;
     const postgresQuery = await postgresClient.queryArray(checkIfFollowsAlreadyQuery);
     const result = postgresQuery.rows[0][0];
-    if (result != true) { // didn't follow before
+    if (result !== true) { // didn't follow before
+      if (hasNewFollows === false) {
+        twitterUsername = await convertTwitterIDtoUsername(userID);
+      }
+      hasNewFollows = true;
       count++;
       // const twitterUsername = "";
       const message = `${twitterUsername} follows ${name}`;
