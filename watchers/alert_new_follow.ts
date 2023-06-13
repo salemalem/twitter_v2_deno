@@ -24,7 +24,7 @@ export default async function alert_new_follow() {
 
   const twitterLink = "https://www.twitter.com/";
 
-  for (const twitterID of twitterIDs){
+  for (const twitterID of twitterIDs) {
     const followMessages:{
       message: string,
       username: string,
