@@ -9,7 +9,7 @@ import {
   sleep,
 } from "/deps.ts"
 
-const userID = "920092361719300096";
+const userID = "14946614";
 
 const followsJson = await fetchFollows(userID);
 const followsCount = followsJson.length;
@@ -23,7 +23,7 @@ let counter = 0;
   const postgresQuery = await postgresClient.queryArray(insertQuery);
 });
 
-await sleep(1);
+await sleep(10);
 if (counter === followsCount) {
   logger.info("Finished inserting all follows into database");
 }

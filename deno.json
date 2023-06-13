@@ -6,6 +6,7 @@
   "tasks": {
     "alert_new_follow_cron": "denon run -A --unstable cron.ts",
     "twitter_follow_put_db": "deno run -A --unstable twitter_follow_put_db.ts",
-    "test_fetch_follow_message": "deno run -A --unstable /test/fetch_follow_message.ts"
+    "test_fetch_follow_message": "deno run -A --unstable /test/fetch_follow_message.ts",
+    "remove_duplicated_follow_id": "deno run -A --unstable /components/removeDuplicateFollowIDs.ts"
   }
 }
