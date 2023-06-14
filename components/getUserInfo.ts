@@ -7,7 +7,8 @@ const bearerToken = Deno.env.get("TWITTER_BEARER_TOKEN");
 export default async function getUserInfo(
   twitterID: string,
 ): Promise<string> {
-  const twitterUserInfo = await fetch(`https://api.twitter.com/2/users/${twitterID}?user.fields=public_metrics,description`, {
+  const reqUrl = `https://api.twitter.com/2/users/${twitterID}?user.fields=public_metrics,description,created_at,verified`
+  const twitterUserInfo = await fetch(reqUrl, {
     headers: {
       'Content-type': 'application/json',
       'Authorization': `Bearer ${bearerToken}`,
