@@ -7,8 +7,7 @@ import {
 import checkNewFollow from "/components/checkNewFollow.ts";
 import crossCheckFollow from "/components/crossCheckFollow.ts";
 import postgresClient from "/db/postgreClient.ts";
-import convertTwitterIDtoUsername from "/components/convertTwitterIDtoUsername.ts";
-import getUserDescription from "/components/getUserDescription.ts";
+import getUserInfo from "../components/getUserInfo.ts";
 
 
 export default async function alert_new_follow() {
@@ -40,7 +39,11 @@ export default async function alert_new_follow() {
         username,
         id,
       } = followMessage;
-      const userDescription = await getUserDescription(id);
+      const userInfo = await getUserInfo(id);
+      const userDescription = userInfo.description;
+      const userMetrics = userInfo.public_metrics;
+      const userFollowers = userMetrics.followers_count;
+      const tweetCount = userMetrics.tweet_count;
       let crossCheckMessage = "";
       let crossFollows = await crossCheckFollow(id);
       logger.info(crossFollows);
@@ -57,7 +60,7 @@ export default async function alert_new_follow() {
       }
       const embed = {
         title: message,
-        description: `***${userDescription}***`,
+        description: `***${userDescription}***\n **Followers:** ${userFollowers}\n **Tweets:** ${tweetCount}`,
         color: 0x00ff00,
         fields: [
           {
