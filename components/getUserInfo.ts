@@ -22,5 +22,5 @@ export default async function getUserInfo(
     logger.error(twitterUserInfoJson.errors);
     throw new Error("Error fetching twitter user info");
   }
-  return twitterUserInfoJson.data.username;
+  return twitterUserInfoJson.data;
 }
