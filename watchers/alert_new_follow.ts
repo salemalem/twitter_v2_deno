@@ -44,6 +44,15 @@ export default async function alert_new_follow() {
       const userMetrics = userInfo.public_metrics;
       const userFollowers = userMetrics.followers_count;
       const tweetCount = userMetrics.tweet_count;
+      let accountCreationDate = userInfo.created_at;
+      accountCreationDate = accountCreationDate.split("T")[0];
+      const verified = userInfo.verified;
+
+      const messageDescription = `***${userDescription}***\n 
+      **Followers:** ${userFollowers}\n 
+      **Tweets:** ${tweetCount} \n
+      **Account Creation Date:** ${accountCreationDate} \n
+      **Verified:** ${verified}`;
       let crossCheckMessage = "";
       let crossFollows = await crossCheckFollow(id);
       logger.info(crossFollows);
@@ -66,7 +75,7 @@ export default async function alert_new_follow() {
       }
       const embed = {
         title: message,
-        description: `***${userDescription}***\n **Followers:** ${userFollowers}\n **Tweets:** ${tweetCount}`,
+        description: messageDescription,
         color: 0x00ff00,
         fields: [
           {
