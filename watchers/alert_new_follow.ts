@@ -58,7 +58,7 @@ export default async function alert_new_follow() {
           }
           crossFollowMessageCount++;
           if (crossFollowMessageCount >= 2) {
-            crossCheckMessage += " , ";
+            crossCheckMessage += ", ";
           }
           crossCheckMessage += " " + await convertTwitterIDtoUsername(crossFollow);
           
