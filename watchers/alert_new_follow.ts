@@ -8,7 +8,7 @@ import checkNewFollow from "/components/checkNewFollow.ts";
 import crossCheckFollow from "/components/crossCheckFollow.ts";
 import postgresClient from "/db/postgreClient.ts";
 import getUserInfo from "../components/getUserInfo.ts";
-
+import convertTwitterIDtoUsername from "../components/convertTwitterIDtoUsername.ts";
 
 export default async function alert_new_follow() {
   logger.info("START: alert_new_follow process");
@@ -50,12 +50,18 @@ export default async function alert_new_follow() {
       logger.info(crossFollows.length);
       crossFollows = [...new Set(crossFollows)];
       if (crossFollows.length > 1) {
+        let crossFollowMessageCount = 0;
         crossCheckMessage = "Already followed by";
         for (const crossFollow of crossFollows) {
           if (crossFollow === twitterID) {
             continue;
           }
+          crossFollowMessageCount++;
+          if (crossFollowMessageCount >= 2) {
+            crossCheckMessage += " , ";
+          }
           crossCheckMessage += " " + await convertTwitterIDtoUsername(crossFollow);
+          
         }
       }
       const embed = {
