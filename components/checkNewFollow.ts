@@ -47,7 +47,7 @@ export default async function checkNewFollow (userID: string) {
       hasNewFollows = true;
       count++;
       // const twitterUsername = "";
-      const message = `${twitterUsername} follows ${name}`;
+      const message = `${twitterUsername} just followed ${name}`;
       const newFollowMessage = {
         message: "",
         username,

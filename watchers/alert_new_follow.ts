@@ -44,7 +44,7 @@ export default async function alert_new_follow() {
       const userMetrics = userInfo.public_metrics;
       const userFollowers = userMetrics.followers_count;
       const tweetCount = userMetrics.tweet_count;
-      let accountCreationDate = userInfo.created_at;
+      let accountCreationDate: string = userInfo.created_at.toString();
       accountCreationDate = accountCreationDate.split("T")[0];
       const verified = userInfo.verified;
 
