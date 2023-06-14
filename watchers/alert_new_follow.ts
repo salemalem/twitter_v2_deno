@@ -57,7 +57,7 @@ export default async function alert_new_follow() {
       }
       const embed = {
         title: message,
-        description: userDescription,
+        description: `***${userDescription}***`,
         color: 0x00ff00,
         fields: [
           {
