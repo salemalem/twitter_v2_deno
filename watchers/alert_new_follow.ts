@@ -9,6 +9,7 @@ import crossCheckFollow from "/components/crossCheckFollow.ts";
 import postgresClient from "/db/postgreClient.ts";
 import getUserInfo from "../components/getUserInfo.ts";
 import convertTwitterIDtoUsername from "../components/convertTwitterIDtoUsername.ts";
+import abbrNum from "../components/abbrNumber.ts";
 
 export default async function alert_new_follow() {
   logger.info("START: alert_new_follow process");
@@ -42,7 +43,8 @@ export default async function alert_new_follow() {
       const userInfo = await getUserInfo(id);
       const userDescription = userInfo.description;
       const userMetrics = userInfo.public_metrics;
-      const userFollowers = userMetrics.followers_count;
+      let userFollowers = userMetrics.followers_count;
+      userFollowers = abbrNum(userFollowers);
       const tweetCount = userMetrics.tweet_count;
       let accountCreationDate: string = userInfo.created_at.toString();
       accountCreationDate = accountCreationDate.split("T")[0];
