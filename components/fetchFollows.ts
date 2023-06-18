@@ -25,6 +25,10 @@ export const fetchFollows = async (userID: string): Promise<Array<TwitterFollowS
     logger.error(followsJson.errors);
     throw new Error("Error fetching follows");
   }
+  if (followsJson.data === undefined) {
+    logger.error(followsJson);
+    throw new Error("Error fetching follows");
+  }
   const followsJsonData = followsJson.data ? followsJson.data : [];
   return followsJsonData;
   
