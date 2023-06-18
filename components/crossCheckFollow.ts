@@ -17,7 +17,6 @@ export default async function crossCheckFollow(userID: string): Promise<Array<st
   const postgresQuery = await postgresClient.queryArray(crossFollowQuery);
 
   logger.info(`Cross check for ${userID} with ${postgresQuery.rows.length} users`);
-  logger.info(postgresQuery.rows);
 
   let crossCheckFollows: Array<string> = [];
   for (const crossFollow of postgresQuery.rows) {
