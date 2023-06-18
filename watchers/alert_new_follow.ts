@@ -89,16 +89,10 @@ export default async function alert_new_follow() {
       logger.info(`Message: ${message}`);
       logger.info(`Cross check: ${crossCheckMessage}`);
 
-      // Secure Zero
-      await sendMessage(discordBot, "1113203625280417822", {
-        // content: message,
-        embeds: [
-          embed
-        ]
-      });
-
-      // Block Hacks
-      await sendMessage(discordBot, "1114084032246992977", {
+      const channelID = Deno.env.get("DISCORD_CHANNEL_ID");
+      await sendMessage(
+        discordBot, 
+        channelID, {
         // content: message,
         embeds: [
           embed
